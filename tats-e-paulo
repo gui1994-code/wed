@@ -106,7 +106,7 @@
 
     <!-- Ecrã inicial com imagem de capa e botão -->
     <div id="start-screen">
-        <img class="cover-image" src="https://raw.githubusercontent.com/gui1994-code/wed/99a1521db6d66648bd1ee765666f43d6b6fabc22/1031-Cover.jpg?token=GHSAT0AAAAAAEOTCD6U7SHW3X6SC6VXH2YG2XHNOBA" alt="Capa">
+        <img class="cover-image" src="https://raw.githubusercontent.com/gui1994-code/wed/99a1521db6d66648bd1ee765666f43d6b6fabc22/1031-Cover.jpg" alt="Capa">
         <div class="cover-overlay"></div>
         <button class="start-btn" onclick="startExperience()">Press to start</button>
     </div>
