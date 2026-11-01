@@ -19,7 +19,7 @@
             font-family: Arial, sans-serif;
         }
 
-        /* Ecrã de capa inicial */
+        /* Ecrã de capa inicial com a imagem */
         #start-screen {
             position: fixed;
             top: 0;
@@ -32,7 +32,6 @@
             z-index: 10;
         }
 
-        /* Imagem de capa em ecrã inteiro */
         .cover-image {
             position: absolute;
             top: 0;
@@ -44,7 +43,6 @@
             z-index: 1;
         }
 
-        /* Camada escura para destacar o botão */
         .cover-overlay {
             position: absolute;
             top: 0;
@@ -55,7 +53,6 @@
             z-index: 2;
         }
 
-        /* Botão estilizado */
         .start-btn {
             position: relative;
             z-index: 3;
@@ -76,29 +73,27 @@
             color: #000;
         }
 
-        /* Contentor do vídeo */
+        /* Contentor do vídeo nativo */
         .video-container {
             position: relative;
             width: 100vw;
             height: 100vh;
             overflow: hidden;
-            display: none;
-            justify-content: center;
-            align-items: center;
+            display: none; /* Oculto até clicar */
+            background-color: #000;
         }
 
-        /* Adaptação para o YouTube Short (Vertical / 9:16) em Ecrã Inteiro */
-        .video-container iframe {
+        /* Faz o vídeo preencher o ecrã inteiro adaptando-se perfeitamente */
+        .video-container video {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 100vw;
-            height: 177.77vw;
-            min-height: 100vh;
-            min-width: 56.25vh;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
             transform: translate(-50%, -50%);
-            border: none;
-            pointer-events: none;
+            object-fit: cover;
         }
     </style>
 </head>
@@ -111,9 +106,12 @@
         <button class="start-btn" onclick="startExperience()">Press to start</button>
     </div>
 
-    <!-- Contentor do Vídeo -->
+    <!-- Contentor do Vídeo Nativo (.mp4) -->
     <div class="video-container" id="videoContainer">
-        <iframe id="youtubePlayer" src="" allow="autoplay"></iframe>
+        <video id="bgVideo" playsinline loop preload="auto">
+            <source src="https://tats-e-paulo.pt/1031.mp4" type="video/mp4">
+            O seu navegador não suporta vídeos.
+        </video>
     </div>
 
     <script>
@@ -121,13 +119,16 @@
             // Esconde a capa
             document.getElementById('start-screen').style.display = 'none';
             
-            // Mostra o vídeo
-            document.getElementById('videoContainer').style.display = 'flex';
+            // Mostra o contentor do vídeo
+            const container = document.getElementById('videoContainer');
+            container.style.display = 'block';
             
-            // Ativa o vídeo do YouTube com som
-            const videoId = 'jCr-8ANDsbM';
-            const iframe = document.getElementById('youtubePlayer');
-            iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=0&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&modestbranding=1`;
+            // Ativa o som e inicia a reprodução do vídeo
+            const video = document.getElementById('bgVideo');
+            video.muted = false; 
+            video.play().catch(error => {
+                console.log("Erro ao reproduzir o vídeo:", error);
+            });
         }
     </script>
 
