@@ -19,7 +19,7 @@
             font-family: Arial, sans-serif;
         }
 
-        /* Ecrã de capa inicial com a imagem */
+        /* Ecrã de capa inicial com a imagem e overlay escuro */
         #start-screen {
             position: fixed;
             top: 0;
@@ -43,6 +43,7 @@
             z-index: 1;
         }
 
+        /* Camada escura de fundo mantida */
         .cover-overlay {
             position: absolute;
             top: 0;
@@ -53,24 +54,28 @@
             z-index: 2;
         }
 
+        /* Botão no meio do ecrã: fundo preto, letras brancas e borda branca */
         .start-btn {
             position: relative;
             z-index: 3;
-            background: rgba(0, 0, 0, 0.6);
-            color: #fff;
-            border: 2px solid #fff;
-            padding: 16px 36px;
-            font-size: 18px;
-            letter-spacing: 3px;
+            background-color: #000000;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            padding: 18px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 4px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
-            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
 
+        /* Efeito ao passar o rato ou tocar */
         .start-btn:hover {
-            background-color: #fff;
-            color: #000;
+            background-color: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
         }
 
         /* Contentor do vídeo nativo */
@@ -83,7 +88,7 @@
             background-color: #000;
         }
 
-        /* Faz o vídeo preencher o ecrã inteiro adaptando-se perfeitamente */
+        /* Vídeo em ecrã inteiro */
         .video-container video {
             position: absolute;
             top: 50%;
@@ -99,7 +104,7 @@
 </head>
 <body>
 
-    <!-- Ecrã inicial com imagem de capa e botão -->
+    <!-- Ecrã inicial com imagem de capa, overlay escuro e botão flutuante no centro -->
     <div id="start-screen">
         <img class="cover-image" src="https://raw.githubusercontent.com/gui1994-code/wed/99a1521db6d66648bd1ee765666f43d6b6fabc22/1031-Cover.jpg" alt="Capa">
         <div class="cover-overlay"></div>
@@ -116,14 +121,14 @@
 
     <script>
         function startExperience() {
-            // Esconde a capa
+            // Esconde o ecrã inicial de capa
             document.getElementById('start-screen').style.display = 'none';
             
-            // Mostra o contentor do vídeo
+            // Mostra o vídeo
             const container = document.getElementById('videoContainer');
             container.style.display = 'block';
             
-            // Ativa o som e inicia a reprodução do vídeo
+            // Liga o som e inicia o vídeo
             const video = document.getElementById('bgVideo');
             video.muted = false; 
             video.play().catch(error => {
